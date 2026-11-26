@@ -69,6 +69,13 @@ describe('EnglishRoadmapPage', () => {
     expect(within(screen.getByRole('dialog')).queryByRole('button', { name: /Anterior/ })).toBeTruthy()
   })
 
+  it('não fecha com Esc enquanto há resposta escrita no campo', async () => {
+    const { user, dialog } = await openFirstTopic()
+    await user.type(within(dialog).getByLabelText('Sua resposta'), 'Hi everyone')
+    await user.keyboard('{Escape}')
+    expect(screen.getByRole('dialog')).toBeTruthy()
+  })
+
   it('fecha com Esc e devolve o foco ao card', async () => {
     const { user, card } = await openFirstTopic()
     await user.keyboard('{Escape}')

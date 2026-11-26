@@ -31,6 +31,16 @@ describe('conteúdo English for Developers', () => {
     }
   })
 
+  it('não repete exemplos nem opções dentro de um tópico (são chaves de lista)', () => {
+    for (const { topic } of englishStudyItems) {
+      const examples = topic.examples.map((e) => e.en)
+      expect(new Set(examples).size).toBe(examples.length)
+      for (const ex of topic.exercises) {
+        if (ex.kind === 'choice') expect(new Set(ex.options).size).toBe(ex.options.length)
+      }
+    }
+  })
+
   it('tem a resposta de cada exercício de escolha entre as opções', () => {
     for (const { topic } of englishStudyItems) {
       for (const ex of topic.exercises) {

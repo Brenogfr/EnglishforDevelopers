@@ -18,6 +18,9 @@ export function useModalBehavior(ref: RefObject<HTMLElement | null>, onClose: ()
 
     function onKeyDown(event: KeyboardEvent) {
       if (event.key === 'Escape') {
+        // Não descarta uma resposta que está sendo escrita.
+        const target = event.target
+        if (target instanceof HTMLTextAreaElement && target.value.trim()) return
         event.preventDefault()
         onClose()
         return
