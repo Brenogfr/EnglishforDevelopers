@@ -2,6 +2,8 @@
 
 Roadmap de estudo de inglês para desenvolvedores, do vocabulário do dia a dia à entrevista técnica.
 
+**Acesse:** https://brenogfr.github.io/EnglishforDevelopers/
+
 - **8 módulos** em 4 níveis (Iniciante → Avançado), **48 tópicos** e **4 projetos práticos**
 - Cada tópico abre uma janela de estudo com explicação em português, exemplos em inglês com tradução e pronúncia (com áudio do navegador), exercícios de escolha e de escrita, e checklist
 - Progresso salvo no navegador, independente de outras trilhas (ex.: Back-end)
@@ -49,6 +51,10 @@ prototipo/          protótipo original de referência (fora do build)
 - Rode `npm test`: os testes de integridade conferem contagens, IDs únicos e respostas válidas.
 
 O progresso fica no `localStorage` do navegador, na chave `roadmap:english:v1`.
+
+## Publicação
+
+Cada push na `main` roda os testes, gera o build e publica no GitHub Pages (`.github/workflows/deploy.yml`). O caminho base `/EnglishforDevelopers/` é definido em `vite.config.ts` e só vale para o build.
 
 ## Desenvolvimento com Claude Code
 
