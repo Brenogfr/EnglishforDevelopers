@@ -11,8 +11,8 @@ export function ExampleList({ examples }: ExampleListProps) {
 
   return (
     <ul className="m-0 flex list-none flex-col gap-2.5 p-0">
-      {examples.map((ex) => (
-        <li key={ex.en} className="flex items-center gap-3.5 rounded-[10px] border border-line bg-surface px-4 py-3.5">
+      {examples.map((ex, i) => (
+        <li key={i}className="flex items-center gap-3.5 rounded-[10px] border border-line bg-surface px-4 py-3.5">
           <div className="flex min-w-0 flex-1 flex-col gap-1">
             <span lang="en" className="text-[15px] leading-snug font-bold">
               {ex.en}

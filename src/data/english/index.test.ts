@@ -31,7 +31,7 @@ describe('conteúdo English for Developers', () => {
     }
   })
 
-  it('não repete exemplos nem opções dentro de um tópico (são chaves de lista)', () => {
+  it('não repete exemplos nem opções dentro de um tópico', () => {
     for (const { topic } of englishStudyItems) {
       const examples = topic.examples.map((e) => e.en)
       expect(new Set(examples).size).toBe(examples.length)

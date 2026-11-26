@@ -23,7 +23,7 @@ export function ChoiceExercise({ exercise }: ChoiceExerciseProps) {
       <div className="flex flex-col gap-2">
         {exercise.options.map((option, i) => (
           <button
-            key={option}
+            key={i}
             type="button"
             lang="en"
             aria-pressed={picked === i}

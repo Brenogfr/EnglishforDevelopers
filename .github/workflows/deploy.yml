@@ -1,8 +1,8 @@
 name: Deploy to GitHub Pages
 
+# Manual: rode em Actions → Deploy to GitHub Pages → Run workflow.
+# Antes da primeira vez, ative Settings → Pages → Source: GitHub Actions.
 on:
-  push:
-    branches: [main]
   workflow_dispatch:
 
 permissions:
