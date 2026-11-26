@@ -1,0 +1,628 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>English for Developers</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=JetBrains+Mono:wght@500;600&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#050506;color:#f2f2f3;font-family:'Manrope',system-ui,sans-serif}
+a{color:#e5a94e}a:hover{color:#f3c47a}
+button{font-family:inherit;color:inherit;cursor:pointer}
+button:focus-visible,textarea:focus-visible{outline:2px solid #8ab4ff;outline-offset:2px}
+.page{max-width:1440px;margin:0 auto;padding:48px 32px 96px;box-sizing:border-box}
+.hero{display:flex;flex-direction:column;align-items:center;text-align:center;gap:18px;margin-bottom:72px}
+.pill{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border:1px solid #26262b;border-radius:8px;background:#0b0b0d;font-size:13px;font-weight:600;color:#c9c9cf}
+.dot{width:8px;height:8px;border-radius:50%;background:#5fd38d;flex:none}
+.title{display:flex;align-items:center;gap:14px;margin:6px 0 0;font-size:44px;font-weight:800;letter-spacing:-0.02em}
+.sub{margin:0;max-width:640px;font-size:16px;line-height:1.6;color:#a1a1aa}
+.overview{width:100%;max-width:560px;display:flex;flex-direction:column;gap:10px;margin-top:8px;padding:18px 20px;border:1px solid #1d1d21;border-radius:12px;background:#0b0b0d;box-sizing:border-box}
+.ov-top{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:13px;font-weight:600;color:#a1a1aa}
+.ov-top strong{color:#f2f2f3}
+.bar{height:6px;background:#1d1d21;border-radius:3px;overflow:hidden}
+.btn-primary{align-self:center;margin-top:6px;min-height:44px;padding:0 20px;border-radius:8px;border:0;background:#f2f2f3;color:#050506;font-size:14px;font-weight:700}
+.btn-primary:hover{background:#ffffff}
+.track{position:relative;display:flex;flex-direction:column;gap:72px}
+.track::before{content:"";position:absolute;left:50%;top:0;bottom:0;width:1px;background:#26262b}
+.level{position:relative;z-index:1;align-self:center;display:flex;flex-direction:column;align-items:center;gap:6px;padding:12px 20px;background:#050506;text-align:center}
+.level-l{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;letter-spacing:.18em}
+.level-d{font-size:13px;color:#a1a1aa}
+.mod{position:relative;display:grid;grid-template-columns:minmax(0,1fr) 64px 220px 64px minmax(0,1fr);align-items:center}
+.side{display:flex;flex-direction:column;gap:10px}
+.card{display:flex;align-items:center;justify-content:space-between;gap:12px;height:46px;padding:0 14px;border:1px solid #1d1d21;border-radius:6px;background:#0b0b0d;font-size:14px;font-weight:700;text-align:left;transition:border-color .15s,background .15s}
+.card:hover{border-color:#3a3a40;background:#111114}
+.card-t{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.conn{width:64px;height:158px;display:block}
+.hub{position:relative;z-index:1}
+.node{width:100%;display:flex;align-items:center;gap:10px;height:46px;padding:0 12px;border-radius:6px;background:#0b0b0d;font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:600;letter-spacing:.12em;text-transform:uppercase}
+.node:hover{background:#111114}
+.chip{padding:3px 6px;border-radius:4px;font-size:12px;letter-spacing:0}
+.node-t{flex:1;text-align:left;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.node-p{font-size:11px;color:#a1a1aa;letter-spacing:0}
+.node-full{position:absolute;top:calc(100% + 8px);left:-24px;right:-24px;text-align:center;font-size:12px;color:#a1a1aa;line-height:1.4;padding:4px 0;background:#050506}
+.project{position:relative;z-index:1;align-self:center;width:100%;max-width:560px;display:flex;align-items:center;gap:14px;padding:16px 18px;border:1px solid #26262b;border-radius:8px;background:#0f0f11;text-align:left}
+.project:hover{border-color:#3a3a40}
+.pj-ic{width:30px;height:30px;border-radius:6px;background:#1c1a14;display:flex;align-items:center;justify-content:center;flex:none}
+.pj-k{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;letter-spacing:.14em}
+.pj-t{font-size:14px;font-weight:700;margin-top:4px}
+.foot{margin-top:96px;text-align:center;font-size:13px;color:#a1a1aa;line-height:1.6}
+.overlay{position:fixed;inset:0;z-index:50;background:rgba(0,0,0,.78);display:flex;align-items:flex-start;justify-content:center;padding:40px 16px;overflow-y:auto;box-sizing:border-box}
+.panel{width:100%;max-width:780px;background:#0c0c0e;border:1px solid #26262b;border-radius:14px;box-shadow:0 30px 80px rgba(0,0,0,.6)}
+.p-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;padding:24px 28px 20px;border-bottom:1px solid #1d1d21}
+.kicker{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase}
+.p-title{margin:8px 0 0;font-size:26px;font-weight:800;letter-spacing:-0.01em}
+.x{flex:none;width:44px;height:44px;border-radius:8px;border:1px solid #26262b;background:transparent;display:flex;align-items:center;justify-content:center}
+.x:hover{background:#141417}
+.p-body{padding:4px 28px 28px;display:flex;flex-direction:column}
+.sec-label{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;margin:24px 0 12px}
+.expl{font-size:15px;line-height:1.7;color:#d4d4d8;margin:0}
+.list{display:flex;flex-direction:column;gap:10px}
+.ex{display:flex;align-items:center;gap:14px;padding:14px 16px;border:1px solid #1d1d21;border-radius:10px;background:#0b0b0d}
+.ex-txt{flex:1;display:flex;flex-direction:column;gap:4px;min-width:0}
+.ex-en{font-size:15px;font-weight:700;line-height:1.45}
+.ex-pt{font-size:14px;color:#a1a1aa;line-height:1.45}
+.ex-pron{font-family:'JetBrains Mono',monospace;font-size:12px;color:#e5a94e}
+.play{flex:none;width:44px;height:44px;border-radius:50%;border:1px solid #2e2e34;background:#141417;display:flex;align-items:center;justify-content:center}
+.play:hover{border-color:#4a4a52}
+.q{padding:16px;border:1px solid #1d1d21;border-radius:10px;background:#0b0b0d;display:flex;flex-direction:column;gap:12px}
+.q-t{font-size:15px;font-weight:700;line-height:1.5;margin:0}
+.q-n{font-family:'JetBrains Mono',monospace;color:#a1a1aa;margin-right:8px}
+.opt{display:flex;align-items:center;gap:12px;min-height:44px;padding:8px 12px;border-radius:8px;text-align:left;font-size:14px;line-height:1.4}
+.letter{font-family:'JetBrains Mono',monospace;font-size:12px;color:#a1a1aa;flex:none}
+.fb{font-size:13px;font-weight:700;margin:0}
+.ans-l{font-size:12px;font-weight:600;color:#a1a1aa}
+.ans{width:100%;min-height:84px;box-sizing:border-box;padding:12px;border-radius:8px;border:1px solid #26262b;background:#050506;color:#f2f2f3;font:inherit;font-size:14px;line-height:1.5;resize:vertical}
+.model{white-space:pre-line;padding:12px 14px;border-radius:8px;background:#0f1a13;border:1px solid #1f3a28;color:#cfeedd;font-size:14px;line-height:1.6}
+.btn-ghost{align-self:flex-start;min-height:44px;padding:0 16px;border-radius:8px;border:1px solid #2e2e34;background:transparent;font-size:14px;font-weight:600;display:inline-flex;align-items:center;gap:8px}
+.btn-ghost:hover{background:#141417}
+.check{display:flex;align-items:center;gap:12px;min-height:44px;padding:4px 2px;border:0;background:none;text-align:left;font-size:14px;width:100%}
+.box{width:20px;height:20px;border-radius:5px;flex:none;display:flex;align-items:center;justify-content:center;box-sizing:border-box}
+.p-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:18px 28px;border-top:1px solid #1d1d21}
+.pos{font-size:12px;color:#a1a1aa;font-family:'JetBrains Mono',monospace}
+.done-btn{min-height:44px;padding:0 18px;border-radius:8px;font-size:14px;font-weight:700;display:inline-flex;align-items:center;gap:8px}
+.nav{display:flex;gap:8px}
+@media (max-width:900px){
+.page{padding:32px 16px 72px}
+.title{font-size:30px}
+.track{gap:48px}
+.track::before{display:none}
+.mod{grid-template-columns:minmax(0,1fr);gap:10px}
+.conn{display:none}
+.hub{order:-1;margin-bottom:4px}
+.node-full{position:static;background:none;margin-top:8px;text-align:left;padding:0}
+.p-head,.p-foot{padding-left:18px;padding-right:18px}
+.p-body{padding:4px 18px 22px}
+.overlay{padding:12px 8px}
+}
+</style>
+</helmet>
+<div class="page">
+<header class="hero">
+<div class="pill"><span class="dot"></span>Trilha paralela · progresso próprio · não bloqueia o Back-end</div>
+<h1 class="title">
+<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="{{accent}}" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.8 7L4 20l1-4.6A8 8 0 1 1 21 12z"></path><path d="M9 10.5l-1.5 1.5L9 13.5"></path><path d="M15 10.5l1.5 1.5-1.5 1.5"></path></svg>
+English for Developers
+</h1>
+<p class="sub">Do vocabulário do dia a dia à entrevista técnica. Cada tópico abre uma janela de estudo com explicação em português, exemplos em inglês, pronúncia, exercícios e checklist.</p>
+<div class="overview">
+<div class="ov-top"><span>Seu progresso no inglês</span><span><strong>{{doneCount}}</strong> de {{total}} tópicos · {{pct}}%</span></div>
+<div class="bar"><div style="{{overallBar}}"></div></div>
+<button class="btn-primary" onClick="{{resume}}">{{resumeLabel}}</button>
+</div>
+</header>
+
+<main class="track">
+<sc-for list="{{modules}}" as="m" hint-placeholder-count="8">
+<sc-if value="{{m.showLevel}}" hint-placeholder-val="{{ false }}">
+<div class="level"><span class="level-l" style="{{m.levelStyle}}">{{m.levelLabel}}</span><span class="level-d">{{m.levelDesc}}</span></div>
+</sc-if>
+<section class="mod" aria-label="{{m.full}}">
+<div class="side">
+<sc-for list="{{m.left}}" as="t" hint-placeholder-count="3">
+<button class="card" onClick="{{t.pick}}"><span class="card-t">{{t.title}}</span><sc-if value="{{t.done}}" hint-placeholder-val="{{ false }}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#5fd38d" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Concluído"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></sc-if></button>
+</sc-for>
+</div>
+<svg class="conn" viewBox="0 0 64 158" preserveAspectRatio="none" fill="none" stroke="#2a2a30" stroke-width="1.2" aria-hidden="true"><path d="M0 23 C34 23 30 79 64 79"></path><path d="M0 79 L64 79"></path><path d="M0 135 C34 135 30 79 64 79"></path></svg>
+<div class="hub">
+<button class="node" style="{{m.nodeStyle}}" onClick="{{m.go}}" aria-label="{{m.goLabel}}">
+<span class="chip" style="{{m.chipStyle}}">{{m.num}}</span>
+<span class="node-t" style="{{m.labelStyle}}">{{m.title}}</span>
+<span class="node-p">{{m.progress}}</span>
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#c9c9cf" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg>
+</button>
+<div class="node-full">{{m.full}}</div>
+</div>
+<svg class="conn" viewBox="0 0 64 158" preserveAspectRatio="none" fill="none" stroke="#2a2a30" stroke-width="1.2" aria-hidden="true"><path d="M0 79 C34 79 30 23 64 23"></path><path d="M0 79 L64 79"></path><path d="M0 79 C34 79 30 135 64 135"></path></svg>
+<div class="side">
+<sc-for list="{{m.right}}" as="t" hint-placeholder-count="3">
+<button class="card" onClick="{{t.pick}}"><span class="card-t">{{t.title}}</span><sc-if value="{{t.done}}" hint-placeholder-val="{{ false }}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#5fd38d" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Concluído"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></sc-if></button>
+</sc-for>
+</div>
+</section>
+<sc-if value="{{m.hasProject}}" hint-placeholder-val="{{ false }}">
+<button class="project" onClick="{{m.project.pick}}">
+<span class="pj-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="{{accent}}" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16v4z"></path><path d="M13.5 6.5l4 4"></path></svg></span>
+<span style="flex: 1; min-width: 0">
+<span class="pj-k" style="display: block; color: {{accent}}">PROJETO PRÁTICO · {{m.project.after}}</span>
+<span class="pj-t" style="display: block">{{m.project.title}}</span>
+</span>
+<sc-if value="{{m.project.done}}" hint-placeholder-val="{{ false }}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#5fd38d" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Concluído"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></sc-if>
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#c9c9cf" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg>
+</button>
+</sc-if>
+</sc-for>
+</main>
+
+<p class="foot">Estude no seu ritmo: nenhum módulo de inglês é pré-requisito do roadmap Back-end.<br>O progresso fica salvo neste navegador.</p>
+</div>
+
+<sc-if value="{{hasLesson}}" hint-placeholder-val="{{ false }}">
+<div class="overlay">
+<div class="panel" role="dialog" aria-modal="true" aria-label="{{lesson.title}}">
+<div class="p-head">
+<div>
+<div class="kicker" style="color: {{accent}}">{{lesson.kicker}}</div>
+<h2 class="p-title">{{lesson.title}}</h2>
+</div>
+<button class="x" onClick="{{close}}" aria-label="Fechar janela de estudo"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f2f2f3" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
+</div>
+<div class="p-body">
+<div class="sec-label" style="color: {{accent}}">Explicação</div>
+<p class="expl">{{lesson.expl}}</p>
+
+<div class="sec-label" style="color: {{accent}}">Exemplos · tradução · pronúncia</div>
+<div class="list">
+<sc-for list="{{lesson.examples}}" as="ex" hint-placeholder-count="3">
+<div class="ex">
+<div class="ex-txt">
+<span class="ex-en" lang="en">{{ex.en}}</span>
+<span class="ex-pt">{{ex.pt}}</span>
+<sc-if value="{{ex.hasPron}}" hint-placeholder-val="{{ true }}"><span class="ex-pron">{{ex.pron}}</span></sc-if>
+</div>
+<button class="play" onClick="{{ex.play}}" aria-label="Ouvir pronúncia"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#f2f2f3" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M7 5l12 7-12 7V5z"></path></svg></button>
+</div>
+</sc-for>
+</div>
+
+<div class="sec-label" style="color: {{accent}}">Exercícios práticos</div>
+<div class="list">
+<sc-for list="{{lesson.exercises}}" as="q" hint-placeholder-count="2">
+<div class="q">
+<p class="q-t"><span class="q-n">{{q.num}}</span>{{q.q}}</p>
+<sc-if value="{{q.isOpt}}" hint-placeholder-val="{{ true }}">
+<div class="list" style="gap: 8px">
+<sc-for list="{{q.options}}" as="op" hint-placeholder-count="3">
+<button class="opt" style="{{op.style}}" onClick="{{op.pick}}" lang="en"><span class="letter">{{op.letter}}</span><span>{{op.label}}</span></button>
+</sc-for>
+</div>
+<sc-if value="{{q.answered}}" hint-placeholder-val="{{ false }}"><p class="fb" style="color: {{q.fbColor}}">{{q.feedback}}</p></sc-if>
+</sc-if>
+<sc-if value="{{q.isWrite}}" hint-placeholder-val="{{ false }}">
+<label class="ans-l" for="{{q.key}}">Sua resposta</label>
+<textarea class="ans" id="{{q.key}}" lang="en" placeholder="Escreva em inglês…"></textarea>
+<button class="btn-ghost" onClick="{{q.reveal}}">{{q.revealLabel}}</button>
+<sc-if value="{{q.revealed}}" hint-placeholder-val="{{ false }}"><div class="model" lang="en">{{q.model}}</div></sc-if>
+</sc-if>
+</div>
+</sc-for>
+</div>
+
+<div class="sec-label" style="color: {{accent}}">Checklist de aprendizagem</div>
+<div>
+<sc-for list="{{lesson.checks}}" as="c" hint-placeholder-count="3">
+<button class="check" onClick="{{c.toggle}}" aria-pressed="{{c.pressed}}">
+<span class="box" style="{{c.boxStyle}}"><sc-if value="{{c.on}}" hint-placeholder-val="{{ false }}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#050506" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></sc-if></span>
+<span style="{{c.textStyle}}">{{c.label}}</span>
+</button>
+</sc-for>
+</div>
+</div>
+<div class="p-foot">
+<div class="nav">
+<sc-if value="{{lesson.hasPrev}}" hint-placeholder-val="{{ true }}"><button class="btn-ghost" onClick="{{lesson.prev}}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#f2f2f3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"></path></svg>Anterior</button></sc-if>
+<sc-if value="{{lesson.hasNext}}" hint-placeholder-val="{{ true }}"><button class="btn-ghost" onClick="{{lesson.next}}">Próximo<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#f2f2f3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg></button></sc-if>
+</div>
+<span class="pos">{{lesson.position}}</span>
+<button class="done-btn" style="{{lesson.doneStyle}}" onClick="{{lesson.toggleDone}}">{{lesson.doneLabel}}</button>
+</div>
+</div>
+</div>
+</sc-if>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#e5a94e","options":["#e5a94e","#8ab4ff","#5fd38d","#c4a7ff"]},"$preview":{"width":1440,"height":3500}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { open: null, done: {}, checks: {}, revealed: {}, picked: {} };
+  }
+
+  componentDidMount() {
+    try {
+      const raw = window.localStorage.getItem('efd-progress-v1');
+      if (raw) {
+        const s = JSON.parse(raw);
+        this.setState({ done: s.done || {}, checks: s.checks || {} });
+      }
+    } catch (e) {}
+  }
+
+  persist(next) {
+    this.setState(next, () => {
+      try {
+        window.localStorage.setItem('efd-progress-v1', JSON.stringify({ done: this.state.done, checks: this.state.checks }));
+      } catch (e) {}
+    });
+  }
+
+  speak(text) {
+    try {
+      const s = window.speechSynthesis;
+      if (!s) return;
+      s.cancel();
+      const u = new SpeechSynthesisUtterance(text);
+      u.lang = 'en-US';
+      u.rate = 0.9;
+      s.speak(u);
+    } catch (e) {}
+  }
+
+  modules() {
+    if (this._m) return this._m;
+    const T = (id, t, e, x, q, c) => ({ id, t, e, x, q, c });
+    const L1 = ['Iniciante', 'NÍVEL 1 · INICIANTE', 'Vocabulário de sobrevivência e as estruturas que aparecem em toda frase.'];
+    const L2 = ['Básico', 'NÍVEL 2 · BÁSICO', 'Ler documentação e falar a língua do código.'];
+    const L3 = ['Intermediário', 'NÍVEL 3 · INTERMEDIÁRIO', 'Entender pessoas falando e começar a conversar.'];
+    const L4 = ['Avançado', 'NÍVEL 4 · AVANÇADO', 'Escrever como profissional e passar em entrevistas.'];
+    this._m = [
+      { n: '01', short: 'Vocabulário', full: 'Vocabulário básico e cotidiano', lv: L1, topics: [
+        T('m1t1', 'Saudações no trabalho', "Cumprimentos curtos abrem reuniões, mensagens e calls. Em ambiente profissional o inglês é direto e informal: 'Hi' e 'Hey' são comuns até com gestores. Responda sempre devolvendo a pergunta ou com uma frase curta.",
+          [["Good morning, team!", "Bom dia, time!", "gud MÓR-nin, tím"], ["How's it going?", "Como vão as coisas?", "ráuz it GÔU-in"], ["Nice to meet you.", "Prazer em conhecer você.", "náis tu MÍT iú"]],
+          [{ q: "Qual é a resposta natural para 'How's it going?'", o: ["Pretty good, thanks! You?", "I am 25 years old.", "Yes, I go."], a: 0 }, { q: "Escreva como você se apresentaria no primeiro dia: nome e função.", w: "Hi everyone, I'm [name]. I'm the new backend developer. Nice to meet you all!" }],
+          ["Sei cumprimentar em mensagens e calls", "Sei responder 'How's it going?'", "Consigo me apresentar em uma frase"]),
+        T('m1t2', 'Números e datas', "Versões, datas de release e quantidades aparecem o tempo todo. Em datas, o inglês americano usa mês antes do dia (March 3rd). Em versões, o ponto é lido como 'point' ou 'dot', e o zero muitas vezes vira 'oh'.",
+          [["The release is on March 3rd.", "O lançamento é em 3 de março.", "dã ri-LÍS iz on MARTCH THÂRD"], ["We're on version 2.10.", "Estamos na versão 2.10.", "VÂR-jân tchú point TÉN"], ["We have 15 open tickets.", "Temos 15 tickets abertos.", "fif-TÍN ÔU-pen TÍ-kits"]],
+          [{ q: "Como se lê 'v1.0.3'?", o: ["version one point oh point three", "version first zero third", "version one comma zero comma three"], a: 0 }, { q: "Escreva em inglês: 'O deploy é no dia 21 de junho às 14h.'", w: "The deploy is on June 21st at 2 p.m." }],
+          ["Leio versões em voz alta", "Escrevo datas no formato americano", "Diferencio fifteen e fifty pela sílaba forte"]),
+        T('m1t3', 'Verbos do dia a dia dev', "Alguns verbos aparecem em quase toda conversa técnica: run, build, fix, push, merge, deploy. Muitos já são usados em português como estrangeirismo, então foque em conjugá-los e pronunciá-los corretamente.",
+          [["Run the tests before you push.", "Rode os testes antes de fazer push.", "rân dã TÉSTS bi-FÓR iú PÚSH"], ["I fixed the bug yesterday.", "Eu corrigi o bug ontem.", "ai FÍKST dã BÂG"], ["Let's merge it after the review.", "Vamos fazer merge depois da revisão.", "léts MÂRDJ it"]],
+          [{ q: "'Merge the branch' significa:", o: ["Mesclar a branch", "Apagar a branch", "Criar a branch"], a: 0 }, { q: "Traduza: 'Eu vou fazer o build e depois rodar os testes.'", w: "I'm going to build it and then run the tests." }],
+          ["Conheço 6 verbos essenciais", "Uso esses verbos no passado", "Pronuncio 'fixed' com som de /t/ no final"]),
+        T('m1t4', 'Objetos e ferramentas', "Vocabulário do ambiente de trabalho: terminal, folder, file, repository, screen, keyboard. Ajuda a seguir tutoriais e a pedir coisas simples durante uma call.",
+          [["Open the terminal and go to the project folder.", "Abra o terminal e vá para a pasta do projeto.", "ÔU-pen dã TÂR-mi-nal"], ["Clone the repository.", "Clone o repositório.", "ri-PÓ-zi-tó-ri"], ["Could you share your screen, please?", "Você pode compartilhar sua tela, por favor?", "shér iór SCRÍN"]],
+          [{ q: "'Folder' é:", o: ["Pasta", "Arquivo", "Tela"], a: 0 }, { q: "Peça para alguém aumentar a fonte do editor.", w: "Could you increase the font size, please?" }],
+          ["Nomeio as ferramentas do meu setup em inglês", "Sei pedir para compartilhar a tela", "Pronuncio 'repository' com a sílaba forte certa"]),
+        T('m1t5', 'Tempo e frequência', "Advérbios como always, usually, sometimes e never vêm antes do verbo principal (mas depois do verbo to be). São essenciais para descrever rotinas, pipelines e comportamentos de sistemas.",
+          [["The pipeline usually takes ten minutes.", "O pipeline geralmente leva dez minutos.", "IÚ-ju-a-li"], ["I never commit directly to main.", "Eu nunca faço commit direto na main.", "NÉ-vâr"], ["The meeting is tomorrow morning.", "A reunião é amanhã de manhã.", "tu-MÓ-rou MÓR-nin"]],
+          [{ q: "Complete: 'The build ___ fails on Mondays.' (às vezes)", o: ["sometimes", "always", "never"], a: 0 }, { q: "Descreva sua rotina de estudo usando 'usually' e 'sometimes'.", w: "I usually study in the morning, and sometimes I practice English at night." }],
+          ["Sei a posição do advérbio na frase", "Descrevo minha rotina", "Uso today, tomorrow e yesterday sem confundir"]),
+        T('m1t6', 'Falsos cognatos', "Palavras parecidas com o português, mas com outro significado. Em textos técnicos, 'actually', 'eventually' e 'assume' causam muitos erros de interpretação.",
+          [["Actually, the bug is in the frontend.", "Na verdade, o bug está no frontend.", "ÉK-tchu-a-li"], ["Eventually, the job finished.", "Por fim, o job terminou.", "i-VÉN-tchu-a-li"], ["I assume the API is down.", "Suponho que a API esteja fora do ar.", "a-SÚM"]],
+          [{ q: "'Eventually' significa:", o: ["Por fim / com o tempo", "Eventualmente / às vezes", "Imediatamente"], a: 0 }, { q: "Use 'actually' para corrigir: 'O problema não é o banco, é o cache.'", w: "Actually, the problem isn't the database, it's the cache." }],
+          ["Sei o sentido real de actually e eventually", "Não traduzo 'pretend' como pretender", "Reconheço falsos cognatos ao ler docs"]),
+      ], project: T('p1', 'Diário de dev em inglês', "Durante 7 dias, escreva 5 frases sobre seu dia de estudo ou trabalho usando presente, passado e futuro. O objetivo é transformar vocabulário e gramática em hábito antes de partir para a leitura técnica.",
+          [["Today I studied Spring Boot for two hours.", "Hoje estudei Spring Boot por duas horas.", ""], ["Yesterday I couldn't fix the CORS error.", "Ontem não consegui corrigir o erro de CORS.", "KÓRS"], ["Tomorrow I'm going to write unit tests.", "Amanhã vou escrever testes unitários.", "IÚ-nit TÉSTS"]],
+          [{ q: "Escreva sua entrada do dia 1 (5 frases).", w: "Today I worked on...\nI learned...\nI had a problem with...\nI fixed it by...\nTomorrow I'm going to..." }, { q: "Qual estrutura usar para 'Amanhã vou revisar o PR'?", o: ["going to / will", "simple past", "verbo to be sozinho"], a: 0 }],
+          ["Escrevi 7 entradas, uma por dia", "Usei presente, passado e futuro", "Reli as entradas e corrigi erros"]) },
+
+      { n: '02', short: 'Gramática', full: 'Gramática essencial', lv: L1, topics: [
+        T('m2t1', 'Verbo to be', "'To be' significa ser ou estar: am, is, are no presente; was, were no passado. É o verbo mais usado para descrever estado de sistemas: online, down, ready, broken.",
+          [["The server is down.", "O servidor está fora do ar.", "SÂR-vâr iz DÁUN"], ["The tests are green.", "Os testes estão passando.", ""], ["Is the API ready?", "A API está pronta?", "iz dã ei-pi-ÁI RÉ-di"]],
+          [{ q: "Complete: 'The logs ___ empty.'", o: ["are", "is", "am"], a: 0 }, { q: "Escreva a pergunta: 'O banco de dados está online?'", w: "Is the database online?" }],
+          ["Conjugo am / is / are", "Faço perguntas invertendo o verbo", "Uso was / were para falar de ontem"]),
+        T('m2t2', 'Simple present', "Usado para fatos, rotinas e para descrever o que um código faz. Na 3ª pessoa do singular (he, she, it) o verbo ganha -s. Negativa e pergunta usam do/does.",
+          [["This function returns a string.", "Esta função retorna uma string.", "ri-TÂRNZ"], ["The cache expires every hour.", "O cache expira a cada hora.", "ek-SPÁI-ârz"], ["It doesn't support Java 8.", "Ele não suporta Java 8.", "DÂ-zânt sâ-PÓRT"]],
+          [{ q: "Complete: 'The method ___ null if nothing is found.'", o: ["returns", "return", "returning"], a: 0 }, { q: "Traduza: 'O serviço não aceita requisições sem token.'", w: "The service doesn't accept requests without a token." }],
+          ["Lembro do -s na 3ª pessoa", "Uso does / doesn't corretamente", "Descrevo o que uma função faz"]),
+        T('m2t3', 'Simple past', "Para ações terminadas: verbos regulares ganham -ed (updated, fixed), irregulares mudam de forma (write → wrote, break → broke). Em pergunta e negativa, use did + verbo na forma base.",
+          [["I updated the dependencies.", "Eu atualizei as dependências.", "âp-DÊI-tid"], ["The deploy failed last night.", "O deploy falhou ontem à noite.", "FÊILD"], ["Did you check the logs?", "Você checou os logs?", ""]],
+          [{ q: "Passado de 'write' (ex.: 'I ___ the tests')", o: ["wrote", "writed", "written"], a: 0 }, { q: "Conte em uma frase o que você fez ontem no projeto.", w: "Yesterday I fixed a bug in the login and wrote two unit tests." }],
+          ["Conheço os 3 sons do -ed", "Sei 10 verbos irregulares comuns", "Pergunto com did + verbo base"]),
+        T('m2t4', 'Present continuous', "Am/is/are + verbo com -ing: o que está acontecendo agora ou neste período. Muito usado em stand-ups e para descrever processos em execução.",
+          [["I'm working on the payment API.", "Estou trabalhando na API de pagamento.", ""], ["The build is running.", "O build está rodando.", "RÂ-nin"], ["We're migrating to Postgres.", "Estamos migrando para o Postgres.", "MÁI-grei-tin"]],
+          [{ q: "'What are you working on?' — melhor resposta:", o: ["I'm working on the auth module.", "I work yesterday.", "I am work auth."], a: 0 }, { q: "Traduza: 'Estamos investigando o problema.'", w: "We're investigating the issue." }],
+          ["Monto frases com am/is/are + -ing", "Diferencio rotina de ação em andamento", "Respondo 'What are you working on?'"]),
+        T('m2t5', 'Futuro: will e going to', "'Will' para decisões na hora, promessas e previsões. 'Going to' para planos já decididos. Ambos aparecem em planejamento de sprint e releases.",
+          [["I'll fix it after lunch.", "Vou corrigir depois do almoço.", "ail FÍKS it"], ["We're going to release v2 next week.", "Vamos lançar a v2 na semana que vem.", "GÔU-in tu"], ["Will it break the API?", "Isso vai quebrar a API?", ""]],
+          [{ q: "Plano já decidido: 'We ___ migrate the database on Monday.'", o: ["are going to", "will to", "going"], a: 0 }, { q: "Prometa revisar o PR de um colega hoje.", w: "I'll review your PR today." }],
+          ["Sei quando usar will", "Sei quando usar going to", "Uso contrações I'll / we're"]),
+        T('m2t6', 'Modais', "Can (poder/conseguir), should (deveria), must (deve, obrigatório), might (talvez). Aparecem em docs, code reviews e recomendações de segurança.",
+          [["You should add a test for this.", "Você deveria adicionar um teste para isso.", "shud"], ["This might cause a memory leak.", "Isso pode causar um vazamento de memória.", "MÉ-mo-ri LÍK"], ["Passwords must be hashed.", "Senhas devem ser armazenadas com hash.", "mâst bi HÉSHT"]],
+          [{ q: "Qual expressa possibilidade incerta?", o: ["might", "must", "should"], a: 0 }, { q: "Sugira educadamente usar uma variável de ambiente.", w: "You should use an environment variable for this." }],
+          ["Diferencio should de must", "Uso might para incerteza", "Leio 'MUST / SHOULD' em especificações"]),
+      ] },
+
+      { n: '03', short: 'Leitura', full: 'Leitura e interpretação de textos', lv: L2, topics: [
+        T('m3t1', 'Skimming e scanning', "Skimming é passar o olho para entender a ideia geral. Scanning é procurar uma informação específica (um comando, um parâmetro). Em documentação, quase nunca você lê tudo do começo ao fim.",
+          [["Getting Started", "Primeiros passos", ""], ["Prerequisites", "Pré-requisitos", "pri-RÉ-kwi-zits"], ["See also", "Veja também", ""]],
+          [{ q: "Você quer só o comando de instalação. Qual técnica?", o: ["Scanning: procurar a informação específica", "Ler tudo palavra por palavra", "Traduzir a página inteira"], a: 0 }, { q: "Liste 3 seções que quase todo README tem (em inglês).", w: "Installation, Usage, License\n(also common: Getting Started, Contributing)" }],
+          ["Sei a diferença entre skimming e scanning", "Encontro um comando sem ler tudo", "Reconheço as seções padrão de docs"]),
+        T('m3t2', 'Palavras de ligação', "Conectores mudam o sentido da frase: however (porém), therefore (portanto), although (embora), instead (em vez disso), otherwise (caso contrário). Perder um conector pode inverter a instrução.",
+          [["However, this method is deprecated.", "No entanto, este método está obsoleto.", "DÉ-pre-kei-tid"], ["Use streams instead of loops.", "Use streams em vez de loops.", "in-STÉD"], ["Set a timeout; otherwise, the request may hang.", "Defina um timeout; caso contrário, a requisição pode travar.", "Â-dhâr-uaiz"]],
+          [{ q: "'Therefore' indica:", o: ["Consequência", "Contraste", "Exemplo"], a: 0 }, { q: "Traduza: 'Embora seja rápido, consome muita memória.'", w: "Although it's fast, it uses a lot of memory." }],
+          ["Reconheço 5 conectores", "Sei quais indicam contraste", "Não perco avisos com 'otherwise'"]),
+        T('m3t3', 'Lendo um README', "Um README responde: o que é, como instalar, como usar e como contribuir. Preste atenção em requisitos de versão ('or later', 'at least') e em comandos que vêm depois de 'Run the following'.",
+          [["This project requires Node 20 or later.", "Este projeto requer Node 20 ou superior.", "ri-KUÁI-ârz"], ["Run the following command:", "Execute o comando a seguir:", "FÓ-lou-in"], ["Contributions are welcome.", "Contribuições são bem-vindas.", ""]],
+          [{ q: "'Node 20 or later' significa:", o: ["Node 20 ou mais novo", "Node 20 ou mais antigo", "Apenas Node 20"], a: 0 }, { q: "Escreva a frase de instalação do README de um projeto seu.", w: "To install, clone the repository and run:\nnpm install" }],
+          ["Encontro requisitos de versão", "Entendo a seção Usage", "Leio um README inteiro sem tradutor"]),
+        T('m3t4', 'Changelogs e release notes', "Notas de versão usam categorias fixas: Added, Changed, Fixed, Deprecated, Removed e Breaking changes. 'Breaking change' significa que a atualização pode quebrar o seu código.",
+          [["Breaking change: /users now requires authentication.", "Mudança incompatível: /users agora exige autenticação.", "BRÊI-kin TCHÊINDJ"], ["Fixed a race condition in the scheduler.", "Corrigida uma condição de corrida no agendador.", "RÊIS kân-DÍ-shân"], ["Deprecated: will be removed in v3.", "Obsoleto: será removido na v3.", ""]],
+          [{ q: "O que exige atenção antes de atualizar?", o: ["Breaking changes", "Added", "Docs"], a: 0 }, { q: "Escreva uma linha de changelog: 'corrigido erro de login com e-mail em maiúsculas'.", w: "Fixed: login failing when the email contains uppercase letters." }],
+          ["Conheço as categorias de changelog", "Identifico breaking changes", "Escrevo uma linha de changelog"]),
+        T('m3t5', 'Mensagens de erro', "Mensagens de erro seguem padrões curtos: o tipo do erro, depois uma descrição. Palavras-chave: refused, denied, not found, unexpected, invalid, timeout. Entendê-las economiza buscas no Google.",
+          [["Connection refused", "Conexão recusada", "ri-FIÚZD"], ["Permission denied", "Permissão negada", "pâr-MÍ-shân di-NÁID"], ["Cannot read properties of undefined", "Não é possível ler propriedades de undefined", ""]],
+          [{ q: "'Unexpected token' geralmente indica:", o: ["Erro de sintaxe", "Falta de memória", "Rede lenta"], a: 0 }, { q: "Explique em inglês simples o que significa 'File not found'.", w: "The program can't find the file at the given path." }],
+          ["Conheço 6 palavras-chave de erros", "Explico um erro em inglês simples", "Leio stack traces sem pânico"]),
+        T('m3t6', 'Issues e Stack Overflow', "Issues e respostas de fórum têm estrutura previsível: steps to reproduce, expected behavior, actual behavior, workaround. Ler isso rápido ajuda a decidir se o problema é o mesmo que o seu.",
+          [["Steps to reproduce", "Passos para reproduzir", "ri-pro-DÚS"], ["Expected behavior vs. actual behavior", "Comportamento esperado vs. real", "bi-RÊI-viâr"], ["This worked for me.", "Isso funcionou para mim.", ""]],
+          [{ q: "'Workaround' significa:", o: ["Solução alternativa temporária", "Correção definitiva", "Ambiente de trabalho"], a: 0 }, { q: "Escreva o título de uma issue: o botão Salvar não envia o formulário.", w: "Save button does not submit the form on Firefox" }],
+          ["Entendo a estrutura de uma issue", "Sei o que é workaround", "Decido rápido se a resposta serve"]),
+      ] },
+
+      { n: '04', short: 'Inglês técnico', full: 'Inglês técnico para programação', lv: L2, topics: [
+        T('m4t1', 'Termos de código', "Function, argument, parameter, loop, array, return. Em inglês, uma função 'takes' (recebe) argumentos e 'returns' (retorna) um valor. Usar esse verbo deixa sua explicação natural.",
+          [["The function takes two arguments.", "A função recebe dois argumentos.", "ÁR-guiu-mânts"], ["Iterate over the array.", "Itere sobre o array.", "Í-tâ-reit"], ["Return early if the input is empty.", "Retorne cedo se a entrada estiver vazia.", ""]],
+          [{ q: "'Takes a parameter' significa:", o: ["Recebe um parâmetro", "Remove um parâmetro", "Testa um parâmetro"], a: 0 }, { q: "Descreva em inglês: função que recebe uma lista e retorna a soma.", w: "This function takes a list and returns the sum of its elements." }],
+          ["Descrevo uma função com takes / returns", "Pronuncio 'iterate'", "Explico um loop em inglês"]),
+        T('m4t2', 'Documentação de API', "Docs de API têm vocabulário fixo: endpoint, request, response, header, query parameter, body, required, optional. Saber esses termos permite usar qualquer API sem tradução.",
+          [["Send a GET request to /orders.", "Envie uma requisição GET para /orders.", "ri-KUÉST"], ["The response body contains a JSON object.", "O corpo da resposta contém um objeto JSON.", "DJÊI-sân"], ["This field is optional.", "Este campo é opcional.", "ÓP-shâ-nal"]],
+          [{ q: "'Required header' é:", o: ["Cabeçalho obrigatório", "Cabeçalho recomendado", "Cabeçalho antigo"], a: 0 }, { q: "Descreva o endpoint POST /users em uma frase.", w: "POST /users creates a new user and returns it with status 201." }],
+          ["Conheço os termos de docs de API", "Diferencio required de optional", "Descrevo um endpoint"]),
+        T('m4t3', 'Status HTTP e erros', "Códigos HTTP têm nomes em inglês que explicam o problema: 400 Bad Request, 401 Unauthorized, 403 Forbidden, 404 Not Found, 500 Internal Server Error. Use os nomes ao reportar problemas.",
+          [["404 Not Found", "Não encontrado", ""], ["401 Unauthorized: missing or invalid token", "Não autorizado: token ausente ou inválido", "ân-Ó-thâ-raizd"], ["500 Internal Server Error", "Erro interno do servidor", "in-TÂR-nal"]],
+          [{ q: "Usuário logado, mas sem permissão, recebe:", o: ["403 Forbidden", "404 Not Found", "200 OK"], a: 0 }, { q: "Explique em inglês a diferença entre 401 e 403.", w: "401 means you are not authenticated. 403 means you are authenticated but not allowed to access the resource." }],
+          ["Sei os nomes dos principais status", "Explico 401 vs 403", "Reporto um erro HTTP em inglês"]),
+        T('m4t4', 'Git e code review', "Code review tem jargão próprio: LGTM, nit, blocking, suggestion, rebase, squash. Comentários educados usam 'Could you...' e 'What do you think about...'.",
+          [["LGTM, looks good to me.", "Parece bom para mim.", "el-dji-ti-ÉM"], ["Nit: rename this variable.", "Detalhe: renomeie esta variável.", "NÍT"], ["Could you rebase onto main?", "Você pode fazer rebase na main?", "RÍ-beis"]],
+          [{ q: "'Nit' em code review é:", o: ["Sugestão pequena, não bloqueante", "Erro crítico", "Aprovação final"], a: 0 }, { q: "Escreva um comentário educado pedindo um teste.", w: "Could you add a unit test for this edge case?" }],
+          ["Conheço LGTM, nit e blocking", "Escrevo comentários educados", "Entendo pedidos de rebase / squash"]),
+        T('m4t5', 'Nomes e comentários', "Bons nomes em inglês seguem padrões: booleanos com is/has/can, funções com verbo (getUser, validateInput), coleções no plural. Comentários explicam o porquê, não o quê.",
+          [["// TODO: handle timeout", "A fazer: tratar timeout", "tu-DÚ"], ["isValid, hasPermission, userCount", "éVálido, temPermissão, contagemDeUsuários", ""], ["// Retry up to 3 times before failing", "Tenta até 3 vezes antes de falhar", "ri-TRÁI"]],
+          [{ q: "Melhor nome para o booleano 'usuário está ativo':", o: ["isActive", "activeUserFlagBool", "ativo"], a: 0 }, { q: "Escreva um comentário explicando por que um cache existe.", w: "// Cache results for 5 minutes to reduce database load." }],
+          ["Nomeio booleanos com is / has", "Nomeio funções com verbos", "Comento o porquê, não o quê"]),
+        T('m4t6', 'Verbos técnicos', "Implement, refactor, handle, throw, validate, retrieve, deploy, rollback. São os verbos de tickets, PRs e documentação. 'Handle' (tratar) e 'throw' (lançar) são os mais confundidos.",
+          [["We need to refactor this class.", "Precisamos refatorar esta classe.", "ri-FÉK-târ"], ["It throws an exception if the ID is invalid.", "Ele lança uma exceção se o ID for inválido.", "ek-SÉP-shân"], ["Retrieve the user by email.", "Recupere o usuário pelo e-mail.", "ri-TRÍV"]],
+          [{ q: "'Handle the error' é:", o: ["Tratar o erro", "Ignorar o erro", "Criar o erro"], a: 0 }, { q: "Traduza: 'Valide a entrada antes de salvar no banco.'", w: "Validate the input before saving it to the database." }],
+          ["Conheço 8 verbos técnicos", "Diferencio handle de throw", "Escrevo um ticket com esses verbos"]),
+      ], project: T('p2', 'Documentação de uma API real', "Escolha uma API pública que você já usa ou quer usar. Leia a página de um endpoint sem tradutor automático, anote palavras novas e escreva um README curto em inglês explicando como chamá-lo.",
+          [["Authenticate with a bearer token in the Authorization header.", "Autentique com um token bearer no cabeçalho Authorization.", "BÉ-râr TÔU-ken"], ["Responses are paginated; use the cursor parameter.", "As respostas são paginadas; use o parâmetro cursor.", "PÉ-dji-nei-tid"], ["Unauthenticated requests are rate-limited.", "Requisições sem autenticação têm limite de taxa.", "RÊIT LÍ-mi-tid"]],
+          [{ q: "'Paginated' significa:", o: ["Dividido em páginas", "Pago", "Autenticado"], a: 0 }, { q: "Escreva a seção Usage do endpoint escolhido em 3 a 5 linhas.", w: "## Usage\nSend a GET request to /repos/{owner}/{repo} with your token.\nThe response is a JSON object with the repository details.\nNote: unauthenticated requests are rate-limited." }],
+          ["Li a documentação sem tradutor", "Anotei 10 palavras novas", "Escrevi o README em inglês"]) },
+
+      { n: '05', short: 'Listening', full: 'Listening: compreensão auditiva', lv: L3, topics: [
+        T('m5t1', 'Sons difíceis', "Três sons travam brasileiros: o 'th' (língua entre os dentes), o -ed final (/t/, /d/ ou /id/) e o 'h' aspirado (nunca som de 'r'). Use o botão de ouvir e repita cada exemplo.",
+          [["think / this", "pensar / isto", "THINK (língua entre os dentes) / DHIS"], ["worked, fixed, updated", "trabalhou, corrigiu, atualizou", "UÂRKT, FÍKST, âp-DÊI-tid"], ["hash, host, header", "hash, host, cabeçalho", "HÉSH, HÔUST, HÉ-dâr (h soprado)"]],
+          [{ q: "Como soa o -ed de 'deployed'?", o: ["/d/: di-PLÓID", "/id/: di-PLÓI-id", "/t/: di-PLÓIT"], a: 0 }, { q: "Ouça os três exemplos e escreva as palavras que você ouviu, sem olhar.", w: "think, this, worked, fixed, updated, hash, host, header" }],
+          ["Produzo o som de 'th'", "Sei os 3 sons do -ed", "Não troco 'h' por 'r'"]),
+        T('m5t2', 'Fala conectada', "Na fala rápida, palavras se juntam: going to → gonna, want to → wanna, got to → gotta, let me → lemme. Você não precisa falar assim, mas precisa reconhecer.",
+          [["I'm gonna push it now.", "Vou dar push agora.", "aim GÂ-na PÚSH it"], ["Do you wanna pair on this?", "Quer parear nisso?", "du iu UÓ-na PÉR"], ["Lemme check.", "Deixa eu ver.", "LÉ-mi TCHÉK"]],
+          [{ q: "'Gotta' é a forma falada de:", o: ["got to / have to: ter que", "going to", "want to"], a: 0 }, { q: "Escreva a forma completa de 'I gotta fix this before the demo.'", w: "I have got to fix this before the demo." }],
+          ["Reconheço gonna, wanna, gotta", "Entendo frases faladas rápido", "Escrevo a forma completa"]),
+        T('m5t3', 'Daily stand-ups', "Stand-ups seguem o roteiro ontem / hoje / bloqueios. Ao ouvir, foque nas palavras-chave: yesterday, today, blocked, waiting on, offline.",
+          [["Yesterday I worked on the login. Today I'll write tests. No blockers.", "Ontem trabalhei no login. Hoje vou escrever testes. Sem bloqueios.", ""], ["I'm blocked by the API team.", "Estou bloqueado pelo time da API.", "BLÓKT"], ["Let's take this offline.", "Vamos discutir isso fora da reunião.", "óf-LÁIN"]],
+          [{ q: "'Take it offline' significa:", o: ["Falar disso depois, fora da reunião", "Desligar o servidor", "Desconectar da internet"], a: 0 }, { q: "Ouça o primeiro exemplo e anote: ontem, hoje e bloqueios.", w: "Yesterday: login\nToday: tests\nBlockers: none" }],
+          ["Sigo um stand-up em inglês", "Reconheço 'blocked' e 'waiting on'", "Anoto o essencial ao ouvir"]),
+        T('m5t4', 'Vídeos e tutoriais', "Tutoriais usam expressões repetidas: go ahead, under the hood, hit enter, spin up. Assista com legenda em inglês (não em português) e pause para repetir frases.",
+          [["Let's go ahead and create a new file.", "Vamos em frente e criar um novo arquivo.", "gôu a-RÉD"], ["Under the hood, it uses a hash map.", "Por baixo dos panos, usa um hash map.", "ÂN-dâr dã HÚD"], ["Spin up a new container.", "Suba um novo container.", "SPÍN ÂP"]],
+          [{ q: "'Under the hood' significa:", o: ["Internamente / por baixo dos panos", "Debaixo da mesa", "Em segredo"], a: 0 }, { q: "Assista a um vídeo técnico curto com legenda em inglês e escreva 3 frases que entendeu.", w: "Exemplo:\nHe explained how Docker images are built in layers.\nEach instruction creates a new layer.\nCached layers make builds faster." }],
+          ["Assisti a um vídeo com legenda em inglês", "Reconheço expressões de tutorial", "Repeti frases em voz alta"]),
+        T('m5t5', 'Siglas faladas', "Siglas são lidas letra por letra (API, URL, CLI) ou como palavra (JSON, SQL como 'sequel', GUI como 'gooey'). Números decimais usam 'point'.",
+          [["Call the API and check the URL.", "Chame a API e confira a URL.", "ei-pi-ÁI, iu-ar-ÉL"], ["Store it as JSON in SQL.", "Armazene como JSON no SQL.", "DJÊI-sân, SÍ-kuel"], ["It takes half a second.", "Leva meio segundo.", "HÉF a SÉ-kând"]],
+          [{ q: "Como se fala '0.5 seconds'?", o: ["half a second / point five seconds", "zero comma five", "zero five seconds"], a: 0 }, { q: "Escreva como se pronunciam: API, URL e CLI.", w: "ay-pee-eye, you-ar-el, see-el-eye" }],
+          ["Leio siglas em voz alta", "Reconheço 'sequel' e 'jay-son'", "Falo números decimais"]),
+        T('m5t6', 'Sotaques e velocidade', "Você vai trabalhar com sotaques diferentes (indiano, britânico, europeu). Não entender é normal: o profissional é pedir para repetir, desacelerar ou confirmar o que entendeu.",
+          [["Sorry, I didn't catch that.", "Desculpe, não entendi.", "KÉTCH"], ["Could you slow down a bit?", "Você pode falar um pouco mais devagar?", "slôu DÁUN"], ["Could you say that again, please?", "Pode repetir, por favor?", "a-GUÉN"]],
+          [{ q: "Educado para pedir repetição:", o: ["Sorry, could you repeat that?", "What?", "Repeat."], a: 0 }, { q: "Escreva como confirmar o que entendeu: 'Então você quer que eu atualize o endpoint, certo?'", w: "So, you want me to update the endpoint, right?" }],
+          ["Peço repetição sem constrangimento", "Confirmo o que entendi", "Ouvi pelo menos 2 sotaques diferentes"]),
+      ] },
+
+      { n: '06', short: 'Speaking', full: 'Speaking: conversação e pronúncia', lv: L3, topics: [
+        T('m6t1', 'Pronúncia de termos', "Termos técnicos muito falados errado: cache (késh), queue (kiú), width (uídth), sudo (sú-du), Linux (LÍ-nâks), suite (suít). Ouça, repita três vezes e grave-se.",
+          [["Clear the cache.", "Limpe o cache.", "KLÍR dã KÉSH"], ["The jobs are in the queue.", "Os jobs estão na fila.", "KIÚ"], ["Set the width to 100 percent.", "Defina a largura como 100%.", "UÍDTH"]],
+          [{ q: "Como se pronuncia 'queue'?", o: ["kiú", "kuê-uê", "kuéu"], a: 0 }, { q: "Grave-se dizendo 'Clear the cache, then check the queue.' e anote o que soou diferente do áudio.", w: "Dica: compare com o botão de ouvir e repita até a sílaba forte coincidir." }],
+          ["Pronuncio cache e queue", "Gravei minha voz e comparei", "Sei a sílaba forte de 10 termos"]),
+        T('m6t2', 'Apresentação pessoal', "Tenha uma apresentação de 30 segundos pronta: quem você é, o que faz, há quanto tempo e o que está aprendendo. 'I've been ... for' expressa tempo até agora.",
+          [["I'm a backend developer focused on Java and Spring.", "Sou desenvolvedor backend focado em Java e Spring.", ""], ["I've been coding for two years.", "Programo há dois anos.", "aiv bin KÔU-din"], ["I'm currently learning cloud architecture.", "Atualmente estou aprendendo arquitetura em nuvem.", "KÂ-rânt-li, ÁR-ki-tek-tchâr"]],
+          [{ q: "'I've been coding for 2 years' significa:", o: ["Programo há 2 anos", "Programei 2 anos atrás", "Vou programar por 2 anos"], a: 0 }, { q: "Escreva sua apresentação em 3 frases e leia em voz alta.", w: "Hi, I'm [name]. I'm a backend developer working with Java and Spring. I enjoy building APIs and I'm currently learning cloud." }],
+          ["Tenho uma apresentação de 30s", "Uso 'I've been ... for'", "Falei em voz alta sem ler"]),
+        T('m6t3', 'Seu stand-up', "Fale em frases curtas, com um verbo por frase. Ontem: past simple. Hoje: going to ou present continuous. Bloqueios: 'I'm blocked on' ou 'No blockers'.",
+          [["Yesterday I finished the user endpoint.", "Ontem terminei o endpoint de usuários.", ""], ["Today I'm going to work on validation.", "Hoje vou trabalhar na validação.", "va-li-DÊI-shân"], ["I'm blocked on database access.", "Estou bloqueado no acesso ao banco.", ""]],
+          [{ q: "Melhor forma de dizer que não há impedimentos:", o: ["No blockers.", "No problem blocks.", "Nothing blocked me never."], a: 0 }, { q: "Escreva seu stand-up de hoje (ontem / hoje / bloqueios).", w: "Yesterday I...\nToday I'm going to...\nNo blockers. / I'm blocked on..." }],
+          ["Falo meu stand-up em menos de 1 minuto", "Uso passado e futuro corretamente", "Sei reportar um bloqueio"]),
+        T('m6t4', 'Explicando um problema', "Estrutura simples: o que acontece, quando acontece, o que você já tentou, qual sua hipótese. 'I think the root cause is...' é a frase-chave.",
+          [["The issue happens when two users update the same record.", "O problema acontece quando dois usuários atualizam o mesmo registro.", "Í-shu"], ["I think the root cause is a missing index.", "Acho que a causa raiz é um índice faltando.", "RÚT KÓZ"], ["I've tried restarting, but it didn't work.", "Já tentei reiniciar, mas não funcionou.", ""]],
+          [{ q: "'Root cause' é:", o: ["Causa raiz", "Usuário root", "Primeira causa"], a: 0 }, { q: "Explique um bug que você já resolveu em 3 frases.", w: "The app crashed when the list was empty.\nThe root cause was a missing null check.\nI added a validation and a test for that case." }],
+          ["Explico o quê, quando e hipótese", "Uso 'I've tried ... but'", "Expliquei um bug real em voz alta"]),
+        T('m6t5', 'Pedindo ajuda', "Pedir ajuda bem é uma habilidade sênior: peça licença, contextualize e confirme o que entendeu. 'Walk me through' e 'Just to make sure' são muito usados.",
+          [["Do you have a minute?", "Você tem um minuto?", ""], ["Could you walk me through this code?", "Pode me explicar este código passo a passo?", "UÓK mi THRÚ"], ["Just to make sure I understand...", "Só para garantir que entendi...", ""]],
+          [{ q: "'Walk me through' significa:", o: ["Me explique passo a passo", "Ande comigo", "Me acompanhe até a saída"], a: 0 }, { q: "Peça ajuda para entender um erro de deploy.", w: "Hey, do you have a minute? Could you help me understand this deploy error?" }],
+          ["Peço ajuda com contexto", "Uso 'walk me through'", "Confirmo o que entendi"]),
+        T('m6t6', 'Reuniões e opiniões', "Concordar, discordar e propor com educação: 'I agree', 'I see your point, but...', 'What if we...?'. Evite 'You're wrong': prefira falar da solução, não da pessoa.",
+          [["I agree with you.", "Concordo com você.", "a-GRÍ"], ["I see your point, but I'm worried about performance.", "Entendo seu ponto, mas me preocupa a performance.", "UÂ-rid"], ["What if we used a queue instead?", "E se usássemos uma fila?", ""]],
+          [{ q: "Discordar com educação:", o: ["I see your point, but I think...", "You're wrong.", "No."], a: 0 }, { q: "Proponha uma alternativa a usar polling.", w: "What if we used webhooks instead of polling?" }],
+          ["Concordo e discordo com educação", "Proponho com 'What if...'", "Participei de uma conversa em inglês"]),
+      ], project: T('p3', 'Stand-up gravado', "Grave um áudio de 1 minuto com seu stand-up em inglês. Ouça, anote palavras que travaram ou soaram estranhas e grave de novo. Repita até soar natural: é o treino de speaking com o melhor custo-benefício.",
+          [["Yesterday I finished the integration with the payment API.", "Ontem terminei a integração com a API de pagamento.", "in-te-GRÊI-shân"], ["Today I'm going to fix the failing tests.", "Hoje vou corrigir os testes que estão falhando.", "FÊI-lin"], ["No blockers for now.", "Sem bloqueios por enquanto.", ""]],
+          [{ q: "Escreva o roteiro do seu stand-up.", w: "Yesterday I...\nToday I'm going to...\nI'm blocked by... / No blockers." }, { q: "O que fazer ao ouvir a gravação?", o: ["Anotar palavras que travaram e regravar", "Apagar e desistir", "Traduzir para o português"], a: 0 }],
+          ["Gravei a primeira versão", "Identifiquei 3 pontos de pronúncia", "Gravei a versão final"]) },
+
+      { n: '07', short: 'Writing', full: 'Writing: escrita', lv: L4, topics: [
+        T('m7t1', 'Mensagens de commit', "Commits em inglês usam o imperativo, como uma ordem: 'Add', 'Fix', 'Remove', não 'Added' ou 'Fixing'. Assunto curto (até ~50 caracteres), sem ponto final.",
+          [["Add pagination to orders endpoint", "Adiciona paginação ao endpoint de pedidos", ""], ["Fix null check in UserService", "Corrige verificação de nulo no UserService", ""], ["Refactor payment validation", "Refatora a validação de pagamento", ""]],
+          [{ q: "Melhor mensagem de commit:", o: ["Fix timeout in payment client", "fixed stuff", "Fixing some things today"], a: 0 }, { q: "Escreva um commit para 'remove código não usado do módulo de relatórios'.", w: "Remove unused code from reports module" }],
+          ["Escrevo commits no imperativo", "Mantenho o assunto curto", "Reescrevi 5 commits antigos"]),
+        T('m7t2', 'Descrição de Pull Request', "Um bom PR responde: o que muda (What), por que (Why) e como testar (How to test). Frases curtas e listas funcionam melhor que parágrafos.",
+          [["This PR adds rate limiting to the public API.", "Este PR adiciona limitação de taxa à API pública.", ""], ["Closes #42.", "Fecha a issue 42.", "KLÔU-ziz"], ["To test, run the app and send 100 requests.", "Para testar, rode a aplicação e envie 100 requisições.", ""]],
+          [{ q: "Qual seção explica a motivação da mudança?", o: ["Why", "How to test", "Screenshots"], a: 0 }, { q: "Escreva o What e o Why de um PR que adiciona cache.", w: "## What\nAdds a Redis cache to the product listing endpoint.\n\n## Why\nThe endpoint was slow under load and hitting the database on every request." }],
+          ["Sei a estrutura What / Why / How", "Escrevi a descrição de um PR", "Uso 'Closes #' para ligar issues"]),
+        T('m7t3', 'Slack e Teams', "Mensagens de chat são curtas e diretas. Comece pelo ponto principal, sem 'Hi' sozinho esperando resposta. Expressões úteis: quick question, heads up, FYI, ETA.",
+          [["Quick question: is staging down?", "Pergunta rápida: o staging caiu?", ""], ["Heads up: staging will be down at 3 p.m.", "Aviso: staging ficará fora do ar às 15h.", "HÉDZ âp"], ["Thanks for the quick fix!", "Valeu pela correção rápida!", ""]],
+          [{ q: "'Heads up' é:", o: ["Um aviso antecipado", "Cabeça erguida", "Uma reclamação"], a: 0 }, { q: "Avise o time que o deploy vai atrasar 30 minutos.", w: "Heads up: today's deploy will be delayed by about 30 minutes. I'll post an update when it's done." }],
+          ["Escrevo mensagens diretas", "Uso heads up, FYI, ETA", "Não mando só 'Hi' e espero"]),
+        T('m7t4', 'E-mails profissionais', "E-mails têm abertura, pedido claro e fechamento. Expressões fixas resolvem 80% dos casos: 'I hope you're doing well', 'Please find attached', 'Looking forward to hearing from you'.",
+          [["I hope you're doing well.", "Espero que você esteja bem.", ""], ["Please find attached the report.", "Segue em anexo o relatório.", "a-TÉTCHT"], ["Looking forward to hearing from you.", "Aguardo seu retorno.", "LÚ-kin FÓR-uârd"]],
+          [{ q: "Fechamento adequado para e-mail profissional:", o: ["Best regards,", "See ya", "Bye bye"], a: 0 }, { q: "Escreva um e-mail curto pedindo acesso ao repositório do projeto.", w: "Hi [name],\n\nI hope you're doing well. Could you please give me access to the project repository? My GitHub username is [username].\n\nThanks in advance,\n[your name]" }],
+          ["Conheço aberturas e fechamentos", "Faço um pedido claro", "Escrevi um e-mail completo"]),
+        T('m7t5', 'Documentação e README', "Documentação boa usa voz ativa, frases curtas e o imperativo para instruções ('Run', 'Set', 'Make sure'). Use 'Note:' para avisos.",
+          [["This service handles user authentication.", "Este serviço cuida da autenticação de usuários.", ""], ["Make sure Docker is running before you start.", "Certifique-se de que o Docker está rodando antes de começar.", ""], ["Note: this endpoint is rate-limited.", "Observação: este endpoint tem limite de taxa.", ""]],
+          [{ q: "Instrução mais clara para documentação:", o: ["Run npm install.", "It would be nice if npm install could be run.", "Npm install is something to run maybe."], a: 0 }, { q: "Escreva uma seção Usage curta para um projeto seu.", w: "## Usage\n1. Copy .env.example to .env\n2. Run docker compose up\n3. Open http://localhost:8080" }],
+          ["Escrevo instruções no imperativo", "Uso 'Note:' e 'Make sure'", "Escrevi o README de um projeto"]),
+        T('m7t6', 'Reportando bugs', "Um bug report útil tem: título claro, passos para reproduzir, resultado esperado, resultado atual e ambiente. Seja específico: versões, navegador, dados de entrada.",
+          [["Steps to reproduce: 1. Log in 2. Open Settings 3. Click Save", "Passos para reproduzir: 1. Faça login 2. Abra Configurações 3. Clique em Salvar", ""], ["Expected: settings are saved. Actual: error 500.", "Esperado: configurações salvas. Atual: erro 500.", "ek-SPÉK-tid, ÉK-tchu-al"], ["Environment: Chrome 120, Windows 11", "Ambiente: Chrome 120, Windows 11", "en-VÁI-rân-mânt"]],
+          [{ q: "O que NÃO é essencial em um bug report?", o: ["Sua opinião sobre quem causou o bug", "Passos para reproduzir", "Resultado esperado vs. atual"], a: 0 }, { q: "Escreva um bug report curto sobre um filtro de busca que ignora acentos.", w: "Title: Search filter ignores accented characters\nSteps: 1. Search for 'José' 2. Check results\nExpected: users named José are listed\nActual: no results\nEnvironment: Chrome 120, production" }],
+          ["Sei a estrutura de um bug report", "Incluo ambiente e versões", "Escrevi um report completo"]),
+      ] },
+
+      { n: '08', short: 'Entrevistas', full: 'Entrevistas técnicas em inglês', lv: L4, topics: [
+        T('m8t1', 'Tell me about yourself', "A primeira pergunta de quase toda entrevista. Estrutura: presente (quem você é hoje), passado (experiência relevante), futuro (o que busca). De 60 a 90 segundos.",
+          [["I'm a backend developer with two years of experience in Java.", "Sou desenvolvedor backend com dois anos de experiência em Java.", "ek-SPÍ-ri-âns"], ["Recently, I built a REST API for an inventory system.", "Recentemente, construí uma API REST para um sistema de estoque.", "ÍN-vân-tó-ri"], ["I'm looking for a role where I can grow technically.", "Busco uma vaga onde eu possa crescer tecnicamente.", "RÔUL"]],
+          [{ q: "Ordem recomendada para a resposta:", o: ["Presente → passado → futuro", "Infância → escola → hobbies", "Salário → benefícios → cargo"], a: 0 }, { q: "Escreva sua resposta em 4 frases.", w: "I'm a backend developer focused on Java and Spring.\nI've worked on REST APIs and relational databases.\nRecently, I built [project], where I [result].\nNow I'm looking for a team where I can keep growing." }],
+          ["Tenho uma resposta de 60 a 90s", "Sigo presente → passado → futuro", "Pratiquei em voz alta"]),
+        T('m8t2', 'Falando de projetos', "Use o método STAR: Situation (contexto), Task (seu papel), Action (o que você fez) e Result (resultado). Fale 'I', não só 'we': o entrevistador quer saber sua parte.",
+          [["I was responsible for designing the database schema.", "Eu era responsável por modelar o esquema do banco.", "ris-PÓN-si-bâl, SKÍ-ma"], ["The main challenge was performance.", "O principal desafio era a performance.", "TCHÉ-lândj"], ["As a result, the response time dropped significantly.", "Como resultado, o tempo de resposta caiu bastante.", "sig-NÍ-fi-kânt-li"]],
+          [{ q: "O que significa STAR?", o: ["Situation, Task, Action, Result", "Start, Test, Apply, Review", "Skills, Tools, Achievements, Roles"], a: 0 }, { q: "Descreva um projeto seu usando STAR em 4 frases.", w: "Situation: Our API was slow during peak hours.\nTask: I had to find the bottleneck.\nAction: I added indexes and a cache layer.\nResult: Response time improved and timeouts stopped." }],
+          ["Conheço o método STAR", "Falo 'I' para mostrar minha parte", "Preparei 2 histórias de projeto"]),
+        T('m8t3', 'Live coding em voz alta', "Em live coding, pensar em voz alta vale tanto quanto o código. Confirme o problema, proponha uma abordagem simples, depois otimize e fale da complexidade.",
+          [["Let me make sure I understand the problem.", "Deixe-me confirmar que entendi o problema.", ""], ["My first approach would be a brute-force solution.", "Minha primeira abordagem seria força bruta.", "BRÚT FÓRS"], ["The time complexity is O(n log n).", "A complexidade de tempo é O(n log n).", "ôu âv EN LÓG EN"]],
+          [{ q: "Como se fala O(n²)?", o: ["O of n squared", "O n two", "zero n square"], a: 0 }, { q: "Escreva como você começaria a resolver 'encontrar duplicados em uma lista'.", w: "Let me make sure I understand: I need to return the values that appear more than once, right?\nA simple approach is to use a HashSet to track what I've seen.\nThat would be O(n) time and O(n) space." }],
+          ["Confirmo o problema antes de codar", "Falo complexidade em inglês", "Pratiquei um exercício narrando"]),
+        T('m8t4', 'Perguntas comportamentais', "'Tell me about a time when...' pede uma história real. Mostre maturidade: conflito resolvido com conversa, erro admitido com aprendizado, prioridade definida por impacto.",
+          [["Tell me about a time you disagreed with a teammate.", "Conte sobre uma vez em que discordou de um colega.", "dis-a-GRÍD"], ["I made a mistake, and here's what I learned.", "Cometi um erro, e foi isso que aprendi.", "mis-TÊIK"], ["I prioritized the tasks by impact.", "Priorizei as tarefas por impacto.", "prai-Ó-ri-taizd"]],
+          [{ q: "Melhor atitude ao falar de um erro:", o: ["Admitir e mostrar o que aprendeu", "Culpar o time", "Dizer que nunca erra"], a: 0 }, { q: "Responda: 'Tell me about a time you had a tight deadline.'", w: "We had to deliver a feature in one week.\nI split it into small tasks and focused on the core flow first.\nWe delivered on time and improved the rest in the next sprint." }],
+          ["Preparei 3 histórias comportamentais", "Mostro aprendizado com erros", "Respondo sem culpar ninguém"]),
+        T('m8t5', 'Quando você não sabe', "Não saber algo é normal. O que conta é como você reage: seja honesto, conecte com algo parecido que você conhece e mostre como descobriria a resposta.",
+          [["I'm not sure, but my guess would be...", "Não tenho certeza, mas meu palpite seria...", "GUÉS"], ["I haven't used that, but I've worked with something similar.", "Não usei isso, mas trabalhei com algo parecido.", "SÍ-mi-lâr"], ["Could you give me a hint?", "Você pode me dar uma dica?", "HÍNT"]],
+          [{ q: "Pergunta sobre uma ferramenta que você nunca usou. Melhor resposta:", o: ["I haven't used it, but I've used X, which is similar...", "Yes, I know it very well.", "Next question."], a: 0 }, { q: "Responda: 'Have you worked with Kafka?' (você só usou RabbitMQ)", w: "Not directly, but I've used RabbitMQ for messaging, so I'm familiar with queues, producers and consumers. I'd be glad to learn Kafka." }],
+          ["Admito não saber com confiança", "Conecto com experiência parecida", "Peço dicas sem constrangimento"]),
+        T('m8t6', 'Perguntas ao entrevistador', "No fim, sempre tenha 2 ou 3 perguntas. Elas mostram interesse e ajudam você a avaliar a empresa: rotina, time, processos e próximos passos.",
+          [["What does a typical day look like for this role?", "Como é um dia típico nesta função?", "TÍ-pi-kal"], ["How does the team handle code reviews?", "Como o time faz code review?", ""], ["What are the next steps in the process?", "Quais são os próximos passos do processo?", ""]],
+          [{ q: "Qual pergunta é melhor no fim da entrevista?", o: ["How does the team handle code reviews?", "How many vacation days do I get on day one?", "No questions."], a: 0 }, { q: "Escreva 2 perguntas que você faria ao entrevistador.", w: "What does onboarding look like for new developers?\nWhat are the biggest technical challenges the team is facing?" }],
+          ["Tenho 3 perguntas prontas", "Sei perguntar sobre próximos passos", "Pratiquei o fechamento da entrevista"]),
+      ], project: T('p4', 'Entrevista simulada', "Simule uma entrevista completa de 30 minutos: apresentação, um projeto com STAR, um problema de código pensando em voz alta e perguntas finais. Use um colega, um tutor ou o Claude como entrevistador e peça feedback.",
+          [["Thanks for having me.", "Obrigado por me receber.", ""], ["Can I take a moment to think?", "Posso pensar um instante?", "MÔU-mânt"], ["Thank you for your time. I look forward to hearing from you.", "Obrigado pelo seu tempo. Aguardo seu retorno.", ""]],
+          [{ q: "Escreva sua resposta para 'Why do you want to work here?'", w: "I'm interested in this role because [reason about the company].\nI'd like to grow in [area], and I believe my experience with [skill] can help the team." }, { q: "Se não entendeu a pergunta, o melhor é:", o: ["Pedir para reformular", "Responder qualquer coisa", "Ficar em silêncio"], a: 0 }],
+          ["Fiz a simulação completa", "Recebi feedback", "Listei 3 pontos para melhorar"]) },
+    ];
+    return this._m;
+  }
+
+  flat() {
+    if (this._f) return this._f;
+    const out = [];
+    this.modules().forEach((m) => {
+      m.topics.forEach((t) => out.push({ ...t, mod: m, isProject: false }));
+      if (m.project) out.push({ ...m.project, mod: m, isProject: true });
+    });
+    this._f = out;
+    return out;
+  }
+
+  renderVals() {
+    const accent = this.props.accent ?? '#e5a94e';
+    const st = this.state;
+    const mods = this.modules();
+    const all = this.flat();
+    const total = all.length;
+    const doneCount = all.filter((t) => st.done[t.id]).length;
+    const pct = Math.round((doneCount / total) * 100);
+    const open = (id) => () => this.setState({ open: id });
+    const firstUndone = (list) => (list.find((t) => !st.done[t.id]) || list[0]).id;
+    const card = (t) => ({ title: t.t, done: !!st.done[t.id], pick: open(t.id) });
+
+    const modules = mods.map((m, mi) => {
+      const d = m.topics.filter((t) => st.done[t.id]).length;
+      const blue = mi % 2 === 0;
+      const c = blue ? '#8ab4ff' : '#e5a94e';
+      return {
+        num: m.n, title: m.short, full: m.full,
+        showLevel: mi === 0 || mods[mi - 1].lv !== m.lv,
+        levelLabel: m.lv[1], levelDesc: m.lv[2], levelStyle: 'color: ' + accent,
+        left: m.topics.slice(0, 3).map(card),
+        right: m.topics.slice(3).map(card),
+        progress: d + '/' + m.topics.length,
+        nodeStyle: 'border: 1px solid ' + (blue ? '#2a3550' : '#4a3a1e'),
+        chipStyle: 'background: ' + (blue ? '#16203a' : '#2a2010') + '; color: ' + c,
+        labelStyle: 'color: ' + c,
+        go: open(firstUndone(m.topics)),
+        goLabel: 'Continuar módulo ' + m.n + ': ' + m.full,
+        hasProject: !!m.project,
+        project: m.project ? { title: m.project.t, done: !!st.done[m.project.id], pick: open(m.project.id), after: 'MÓDULO ' + m.n } : {},
+      };
+    });
+
+    let lesson = {};
+    const idx = st.open ? all.findIndex((t) => t.id === st.open) : -1;
+    if (idx >= 0) {
+      const t = all[idx];
+      const isDone = !!st.done[t.id];
+      const optStyle = (picked, oi, a) => {
+        if (picked === undefined) return 'border: 1px solid #26262b; background: #050506';
+        if (oi === a) return 'border: 1px solid #5fd38d; background: #0f1a13';
+        if (oi === picked) return 'border: 1px solid #f0a35e; background: #1c130b';
+        return 'border: 1px solid #1d1d21; background: #050506; opacity: 0.7';
+      };
+      lesson = {
+        kicker: t.isProject ? 'Projeto prático · ' + t.mod.lv[0] : t.mod.n + ' · ' + t.mod.short + ' · ' + t.mod.lv[0],
+        title: t.t,
+        expl: t.e,
+        examples: t.x.map((x) => ({ en: x[0], pt: x[1], pron: x[2] ? 'pronúncia: ' + x[2] : '', hasPron: !!x[2], play: () => this.speak(x[0]) })),
+        exercises: t.q.map((q, qi) => {
+          const key = t.id + '-q' + qi;
+          const picked = st.picked[key];
+          const isOpt = !!q.o;
+          const revealed = !!st.revealed[key];
+          return {
+            key, num: String(qi + 1).padStart(2, '0'), q: q.q, isOpt, isWrite: !isOpt,
+            options: isOpt ? q.o.map((o, oi) => ({
+              label: o, letter: 'ABCD'[oi], style: optStyle(picked, oi, q.a),
+              pick: () => this.setState({ picked: { ...this.state.picked, [key]: oi } }),
+            })) : [],
+            answered: picked !== undefined,
+            feedback: picked === q.a ? 'Correto!' : 'Quase. A resposta certa está destacada em verde.',
+            fbColor: picked === q.a ? '#5fd38d' : '#f0a35e',
+            model: q.w || '', revealed,
+            revealLabel: revealed ? 'Esconder resposta modelo' : 'Ver resposta modelo',
+            reveal: () => this.setState({ revealed: { ...this.state.revealed, [key]: !this.state.revealed[key] } }),
+          };
+        }),
+        checks: t.c.map((c, ci) => {
+          const key = t.id + '-c' + ci;
+          const on = !!st.checks[key];
+          return {
+            label: c, on, pressed: on ? 'true' : 'false',
+            boxStyle: on ? 'background: #5fd38d; border: 0' : 'border: 1.5px solid #4a4a52',
+            textStyle: on ? 'color: #a1a1aa; text-decoration: line-through' : 'color: #f2f2f3',
+            toggle: () => this.persist({ checks: { ...this.state.checks, [key]: !this.state.checks[key] } }),
+          };
+        }),
+        doneLabel: isDone ? 'Concluído · desmarcar' : 'Marcar como concluído',
+        doneStyle: isDone ? 'border: 1px solid #1f3a28; background: #0f1a13; color: #5fd38d' : 'border: 0; background: #f2f2f3; color: #050506',
+        toggleDone: () => this.persist({ done: { ...this.state.done, [t.id]: !this.state.done[t.id] } }),
+        hasPrev: idx > 0,
+        hasNext: idx < all.length - 1,
+        prev: idx > 0 ? open(all[idx - 1].id) : null,
+        next: idx < all.length - 1 ? open(all[idx + 1].id) : null,
+        position: (idx + 1) + ' de ' + total,
+      };
+    }
+
+    return {
+      accent,
+      modules,
+      total, doneCount, pct,
+      overallBar: 'width: ' + pct + '%; height: 100%; background: ' + accent + '; border-radius: 3px',
+      resumeLabel: doneCount === 0 ? 'Começar pelo módulo 01' : (doneCount === total ? 'Revisar desde o início' : 'Continuar de onde parei'),
+      resume: open(firstUndone(all)),
+      hasLesson: idx >= 0,
+      lesson,
+      close: () => this.setState({ open: null }),
+    };
+  }
+}
+</script>
+</body>
+</html>

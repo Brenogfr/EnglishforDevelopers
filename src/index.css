@@ -1,0 +1,57 @@
+@import 'tailwindcss';
+
+@theme {
+  --font-sans: 'Manrope', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+  --color-bg: #050506;
+  --color-surface: #0b0b0d;
+  --color-surface-2: #0f0f11;
+  --color-raised: #141417;
+  --color-hover: #111114;
+  --color-panel: #0c0c0e;
+  --color-control: #2e2e34;
+  --color-control-strong: #4a4a52;
+  --color-accent-soft: #1c1a14;
+  --color-line: #1d1d21;
+  --color-line-strong: #26262b;
+  --color-line-hover: #3a3a40;
+  --color-connector: #2a2a30;
+
+  --color-fg: #f2f2f3;
+  --color-fg-soft: #d4d4d8;
+  --color-muted: #a1a1aa;
+
+  --color-accent: #e5a94e;
+  --color-accent-bg: #2a2010;
+  --color-accent-line: #4a3a1e;
+  --color-info: #8ab4ff;
+  --color-info-bg: #16203a;
+  --color-info-line: #2a3550;
+  --color-success: #5fd38d;
+  --color-success-bg: #0f1a13;
+  --color-success-line: #1f3a28;
+  --color-success-fg: #cfeedd;
+  --color-warn: #f0a35e;
+  --color-warn-bg: #1c130b;
+}
+
+@layer base {
+  html {
+    color-scheme: dark;
+  }
+  body {
+    margin: 0;
+    background: var(--color-bg);
+    color: var(--color-fg);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+  button {
+    cursor: pointer;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-info);
+    outline-offset: 2px;
+  }
+}
